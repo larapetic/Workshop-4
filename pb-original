@@ -32,10 +32,10 @@ void loop() {
       analogWrite(ledPin, 0);     // Off
       break;
     case 1:
-      analogWrite(ledPin, 80);    // Low
+      analogWrite(ledPin, 165);    // Medium
       break;
     case 2:
-      analogWrite(ledPin, 165);   // Medium
+      analogWrite(ledPin, 80);   // Low
       break;
     case 3:
       analogWrite(ledPin, 250);   // High
