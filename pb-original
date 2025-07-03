@@ -1,0 +1,47 @@
+const int buttonPin = 2;
+const int ledPin = 9;
+
+int buttonState = 0;
+int lastButtonState = 0;
+int mode = 0;
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+ 
+  Serial.print("Button State: ");
+  Serial.println(buttonState);
+
+  // Detect button press (falling edge)
+  if (lastButtonState == HIGH && buttonState == LOW) {
+    mode = (mode + 1) % 4;  // Cycle through 0–3
+    Serial.print("Mode changed to: ");
+    Serial.println(mode);
+  }
+
+  // Set LED brightness
+  switch (mode) {
+    case 0:
+      analogWrite(ledPin, 0);     // Off
+      break;
+    case 1:
+      analogWrite(ledPin, 250);    // High
+      break;
+    case 2:
+      analogWrite(ledPin, 165);   // Medium
+      break;
+    case 3:
+      analogWrite(ledPin, 80);   // Low
+      break;
+  }
+
+  lastButtonState = buttonState;
+  delay(50);  // Debounce delay
+}
